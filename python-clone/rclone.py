@@ -33,7 +33,6 @@ def parse_args():
 
     return parser.parse_args()
 
-
 args = parse_args()
 
 if args.cmd == 'ls':
