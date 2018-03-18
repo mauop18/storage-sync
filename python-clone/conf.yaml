@@ -1,15 +1,32 @@
-options: 
-    server:
-        - yandex
-        - nxs
-    type: "sync"
-    source: "/home/a.zhideev/rclone-test/"
-    destination: "test"
-    excludes: 
-        - "222*"
-        - "/4/44/"
-    excludes_file: "/home/a.zhideev/rclone/excludes.conf"
-    bandwidth: "20K"
-    keys: 
-        - ""
-        #- "--no-gzip-encoding"
+server:
+    #server name (Same as in config file)
+    nxs:
+        source: "/home/a.zhideev/rclone-test/"
+        destination: "test"                                         #
+        logfile_path: "/home/a.zhideev/rclone/log/"
+        excludes:                                                   #Relatve PATH
+            - "222*"
+            - "/4/44/"
+        excludes_file: "/home/a.zhideev/rclone/excludes.conf"       
+        bandwidth: "100K"                                           #
+        loglevel: "INFO"                                            # DEBUG|INFO|NOTICE|ERROR
+        storage_size: "1"                                           # in Gb
+        quota: "1"                                                 # %  
+        keys: 
+            - ""
+            #- "--no-gzip-encoding"
+    yandex:
+        source: "/home/a.zhideev/rclone-test/"
+        destination: "test"                                         #
+        logfile_path: "/home/a.zhideev/rclone/log/"
+        excludes:                                                   #Relatve PATH
+            - "222*"
+            - "/4/44/"
+        excludes_file: "/home/a.zhideev/rclone/excludes.conf"       
+        bandwidth: "100K"                                           #
+        loglevel: "INFO"                                            # DEBUG|INFO|NOTICE|ERROR
+        storage_size: "1"                                           # in Gb
+        quota: "5"                                                 # %  
+        keys: 
+            - ""
+            #- "--no-gzip-encoding"
