@@ -1,0 +1,138 @@
+2018/03/16 11:57:22 DEBUG : Using config file from "/home/a.zhideev/rclone/rclone.conf"
+2018/03/16 11:57:22 INFO  : Starting bandwidth limiter at 20kBytes/s
+2018/03/16 11:57:22 DEBUG : rclone: Version "v1.39" starting with parameters ["rclone" "--config" "/home/a.zhideev/rclone/rclone.conf" "--log-file=/home/a.zhideev/rclone/log" "--log-level" "DEBUG" "--dry-run" "sync" "/home/a.zhideev/rclone-test/" "--exclude" "222*" "--exclude" "/4/44/" "--exclude-from" "/home/a.zhideev/rclone/excludes.conf" "--bwlimit=20K" "nxs:test"]
+2018/03/16 11:57:24 INFO  : webdav root 'test': Modify window is 1s
+2018/03/16 11:57:25 DEBUG : test-file: Size and modification time the same (differ by 0s, within tolerance 1s)
+2018/03/16 11:57:25 DEBUG : test-file: Unchanged skipping
+2018/03/16 11:57:25 DEBUG : 4/44: Excluded from sync (and deletion)
+2018/03/16 11:57:26 DEBUG : 4/44: Excluded from sync (and deletion)
+2018/03/16 11:57:28 DEBUG : 3/33/3: Size and modification time the same (differ by 0s, within tolerance 1s)
+2018/03/16 11:57:28 DEBUG : 3/33/3: Unchanged skipping
+2018/03/16 11:57:28 DEBUG : 3/33/1: Size and modification time the same (differ by 0s, within tolerance 1s)
+2018/03/16 11:57:28 DEBUG : 3/33/1: Unchanged skipping
+2018/03/16 11:57:28 DEBUG : 3/33/2: Size and modification time the same (differ by 0s, within tolerance 1s)
+2018/03/16 11:57:28 DEBUG : 3/33/2: Unchanged skipping
+2018/03/16 11:57:30 DEBUG : 3/22/3: Size and modification time the same (differ by 0s, within tolerance 1s)
+2018/03/16 11:57:30 DEBUG : 3/22/3: Unchanged skipping
+2018/03/16 11:57:30 DEBUG : 3/22/1: Size and modification time the same (differ by 0s, within tolerance 1s)
+2018/03/16 11:57:30 DEBUG : 3/22/1: Unchanged skipping
+2018/03/16 11:57:30 DEBUG : 3/22/1500785442199368569.jpg: Size and modification time the same (differ by 0s, within tolerance 1s)
+2018/03/16 11:57:30 DEBUG : 3/22/1500785442199368569.jpg: Unchanged skipping
+2018/03/16 11:57:30 DEBUG : 3/22/2: Size and modification time the same (differ by 0s, within tolerance 1s)
+2018/03/16 11:57:30 DEBUG : 3/22/2: Unchanged skipping
+2018/03/16 11:57:30 DEBUG : 1/22/3: Size and modification time the same (differ by 0s, within tolerance 1s)
+2018/03/16 11:57:30 DEBUG : 1/22/3: Unchanged skipping
+2018/03/16 11:57:30 DEBUG : 1/22/1: Size and modification time the same (differ by 0s, within tolerance 1s)
+2018/03/16 11:57:30 DEBUG : 1/22/1: Unchanged skipping
+2018/03/16 11:57:30 DEBUG : 1/22/2: Size and modification time the same (differ by 0s, within tolerance 1s)
+2018/03/16 11:57:30 DEBUG : 1/22/2: Unchanged skipping
+2018/03/16 11:57:30 DEBUG : 2/22/3: Size and modification time the same (differ by 0s, within tolerance 1s)
+2018/03/16 11:57:30 DEBUG : 2/22/3: Unchanged skipping
+2018/03/16 11:57:30 DEBUG : 2/22/1: Size and modification time the same (differ by 0s, within tolerance 1s)
+2018/03/16 11:57:30 DEBUG : 2/22/1: Unchanged skipping
+2018/03/16 11:57:30 DEBUG : 2/22/2: Size and modification time the same (differ by 0s, within tolerance 1s)
+2018/03/16 11:57:30 DEBUG : 2/22/2: Unchanged skipping
+2018/03/16 11:57:31 DEBUG : 1/11/1: Size and modification time the same (differ by 0s, within tolerance 1s)
+2018/03/16 11:57:31 DEBUG : 1/11/1: Unchanged skipping
+2018/03/16 11:57:31 DEBUG : 1/11/2: Size and modification time the same (differ by 0s, within tolerance 1s)
+2018/03/16 11:57:31 DEBUG : 1/11/2: Unchanged skipping
+2018/03/16 11:57:31 DEBUG : 1/11/3: Size and modification time the same (differ by 0s, within tolerance 1s)
+2018/03/16 11:57:31 DEBUG : 1/11/3: Unchanged skipping
+2018/03/16 11:57:31 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/16 11:57:31 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/16 11:57:31 INFO  : Waiting for deletions to finish
+2018/03/16 11:57:31 NOTICE: 111-222.log: Not deleting as --dry-run
+2018/03/16 11:57:31 NOTICE: 111-333.log: Not deleting as --dry-run
+2018/03/16 11:57:31 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                19
+Transferred:            0
+Elapsed time:        9.1s
+
+2018/03/16 11:57:31 DEBUG : Go routines at exit 13
+2018/03/16 11:57:31 DEBUG : rclone: Version "v1.39" finishing with parameters ["rclone" "--config" "/home/a.zhideev/rclone/rclone.conf" "--log-file=/home/a.zhideev/rclone/log" "--log-level" "DEBUG" "--dry-run" "sync" "/home/a.zhideev/rclone-test/" "--exclude" "222*" "--exclude" "/4/44/" "--exclude-from" "/home/a.zhideev/rclone/excludes.conf" "--bwlimit=20K" "nxs:test"]
+2018/03/16 11:59:50 DEBUG : Using config file from "/home/a.zhideev/rclone/rclone.conf"
+2018/03/16 11:59:50 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/16 11:59:50 DEBUG : rclone: Version "v1.39" starting with parameters ["rclone" "--config" "/home/a.zhideev/rclone/rclone.conf" "--log-file=/home/a.zhideev/rclone/log" "--log-level" "DEBUG" "--dry-run" "sync" "/home/a.zhideev/rclone-test/" "--exclude" "222*" "--exclude" "/4/44/" "--exclude-from" "/home/a.zhideev/rclone/excludes.conf" "--bwlimit=100K" "nxs:backup"]
+2018/03/16 11:59:51 INFO  : webdav root 'backup': Modify window is 1s
+2018/03/16 11:59:51 NOTICE: 585-cluster-balance-v1-network-33.png: Not copying as --dry-run
+2018/03/16 11:59:51 NOTICE: Beautex-v1-cpu-general.png: Not copying as --dry-run
+2018/03/16 11:59:51 NOTICE: Beautex-v1-cpu-utilization.png: Not copying as --dry-run
+2018/03/16 11:59:51 NOTICE: 585-cluster-balance-v1-network-32.png: Not copying as --dry-run
+2018/03/16 11:59:51 NOTICE: 585-cluster-balance-v1-network-traffic.png: Not copying as --dry-run
+2018/03/16 11:59:51 NOTICE: Beautex-v1-apache-request.png: Not copying as --dry-run
+2018/03/16 11:59:51 NOTICE: 14.05/Kolos-Farma-s3-available-memory-12h.png: Not copying as --dry-run
+2018/03/16 11:59:51 NOTICE: 14.05/Kolos-Farma-s3-available-memory-2h.png: Not copying as --dry-run
+2018/03/16 11:59:51 NOTICE: 14.05/Kolos-Farma-s3-available-memory-8h.png: Not copying as --dry-run
+2018/03/16 11:59:51 INFO  : webdav root 'backup': Waiting for checks to finish
+2018/03/16 11:59:51 INFO  : webdav root 'backup': Waiting for transfers to finish
+2018/03/16 11:59:51 INFO  : Waiting for deletions to finish
+2018/03/16 11:59:51 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 0
+Transferred:            9
+Elapsed time:        1.1s
+
+2018/03/16 11:59:51 DEBUG : Go routines at exit 7
+2018/03/16 11:59:51 DEBUG : rclone: Version "v1.39" finishing with parameters ["rclone" "--config" "/home/a.zhideev/rclone/rclone.conf" "--log-file=/home/a.zhideev/rclone/log" "--log-level" "DEBUG" "--dry-run" "sync" "/home/a.zhideev/rclone-test/" "--exclude" "222*" "--exclude" "/4/44/" "--exclude-from" "/home/a.zhideev/rclone/excludes.conf" "--bwlimit=100K" "nxs:backup"]
+2018/03/16 12:03:37 DEBUG : Using config file from "/home/a.zhideev/rclone/rclone.conf"
+2018/03/16 12:03:37 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/16 12:03:37 DEBUG : rclone: Version "v1.39" starting with parameters ["rclone" "--config" "/home/a.zhideev/rclone/rclone.conf" "--log-file=/home/a.zhideev/rclone/log" "--log-level" "DEBUG" "--dry-run" "sync" "/home/a.zhideev/rclone-test/" "--exclude" "222*" "--exclude" "/4/44/" "--exclude-from" "/home/a.zhideev/rclone/excludes.conf" "--bwlimit=100K" "nxs:backup"]
+2018/03/16 12:03:38 INFO  : webdav root 'backup': Modify window is 1s
+2018/03/16 12:03:38 NOTICE: 585-cluster-balance-v1-network-32.png: Not copying as --dry-run
+2018/03/16 12:03:38 NOTICE: Beautex-v1-cpu-general.png: Not copying as --dry-run
+2018/03/16 12:03:38 NOTICE: Beautex-v1-cpu-utilization.png: Not copying as --dry-run
+2018/03/16 12:03:38 NOTICE: 585-cluster-balance-v1-network-33.png: Not copying as --dry-run
+2018/03/16 12:03:38 NOTICE: 585-cluster-balance-v1-network-traffic.png: Not copying as --dry-run
+2018/03/16 12:03:38 NOTICE: Beautex-v1-apache-request.png: Not copying as --dry-run
+2018/03/16 12:03:38 INFO  : webdav root 'backup': Waiting for checks to finish
+2018/03/16 12:03:38 INFO  : webdav root 'backup': Waiting for transfers to finish
+2018/03/16 12:03:38 INFO  : Waiting for deletions to finish
+2018/03/16 12:03:38 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 0
+Transferred:            6
+Elapsed time:       900ms
+
+2018/03/16 12:03:38 DEBUG : Go routines at exit 7
+2018/03/16 12:03:38 DEBUG : rclone: Version "v1.39" finishing with parameters ["rclone" "--config" "/home/a.zhideev/rclone/rclone.conf" "--log-file=/home/a.zhideev/rclone/log" "--log-level" "DEBUG" "--dry-run" "sync" "/home/a.zhideev/rclone-test/" "--exclude" "222*" "--exclude" "/4/44/" "--exclude-from" "/home/a.zhideev/rclone/excludes.conf" "--bwlimit=100K" "nxs:backup"]
+2018/03/16 12:04:10 DEBUG : Using config file from "/home/a.zhideev/rclone/rclone.conf"
+2018/03/16 12:04:10 DEBUG : rclone: Version "v1.39" starting with parameters ["rclone" "--config" "/home/a.zhideev/rclone/rclone.conf" "--log-file=/home/a.zhideev/rclone/log" "--log-level" "DEBUG" "--dry-run" "ls" "nxs:"]
+2018/03/16 12:04:10 INFO  : webdav root '': Modify window is 1s
+2018/03/16 12:04:16 DEBUG : Go routines at exit 24
+2018/03/16 12:04:16 DEBUG : rclone: Version "v1.39" finishing with parameters ["rclone" "--config" "/home/a.zhideev/rclone/rclone.conf" "--log-file=/home/a.zhideev/rclone/log" "--log-level" "DEBUG" "--dry-run" "ls" "nxs:"]
+2018/03/16 12:04:36 DEBUG : Using config file from "/home/a.zhideev/rclone/rclone.conf"
+2018/03/16 12:04:36 DEBUG : rclone: Version "v1.39" starting with parameters ["rclone" "--config" "/home/a.zhideev/rclone/rclone.conf" "--log-file=/home/a.zhideev/rclone/log" "--log-level" "DEBUG" "--dry-run" "ls" "nxs:backups"]
+2018/03/16 12:04:37 INFO  : webdav root 'backups': Modify window is 1s
+2018/03/16 12:04:40 DEBUG : Go routines at exit 10
+2018/03/16 12:04:40 DEBUG : rclone: Version "v1.39" finishing with parameters ["rclone" "--config" "/home/a.zhideev/rclone/rclone.conf" "--log-file=/home/a.zhideev/rclone/log" "--log-level" "DEBUG" "--dry-run" "ls" "nxs:backups"]
+2018/03/16 12:05:16 DEBUG : Using config file from "/home/a.zhideev/rclone/rclone.conf"
+2018/03/16 12:05:16 DEBUG : rclone: Version "v1.39" starting with parameters ["rclone" "--config" "/home/a.zhideev/rclone/rclone.conf" "--log-file=/home/a.zhideev/rclone/log" "--log-level" "DEBUG" "--dry-run" "size" "nxs:"]
+2018/03/16 12:05:16 INFO  : webdav root '': Modify window is 1s
+2018/03/16 12:05:19 DEBUG : Go routines at exit 18
+2018/03/16 12:05:19 DEBUG : rclone: Version "v1.39" finishing with parameters ["rclone" "--config" "/home/a.zhideev/rclone/rclone.conf" "--log-file=/home/a.zhideev/rclone/log" "--log-level" "DEBUG" "--dry-run" "size" "nxs:"]
+2018/03/16 13:10:43 DEBUG : Using config file from "/home/a.zhideev/rclone/rclone.conf"
+2018/03/16 13:10:43 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/16 13:10:43 DEBUG : rclone: Version "v1.39" starting with parameters ["rclone" "--config" "/home/a.zhideev/rclone/rclone.conf" "--log-file=/home/a.zhideev/rclone/log" "--log-level" "DEBUG" "--dry-run" "sync" "/home/a.zhideev/rclone-test/" "--exclude" "222*" "--exclude" "/4/44/" "--exclude-from" "/home/a.zhideev/rclone/excludes.conf" "--bwlimit=100K" "nxs:backup"]
+2018/03/16 13:10:44 INFO  : webdav root 'backup': Modify window is 1s
+2018/03/16 13:10:44 NOTICE: 585-cluster-balance-v1-network-33.png: Not copying as --dry-run
+2018/03/16 13:10:44 NOTICE: Beautex-v1-cpu-general.png: Not copying as --dry-run
+2018/03/16 13:10:44 NOTICE: Beautex-v1-cpu-utilization.png: Not copying as --dry-run
+2018/03/16 13:10:44 NOTICE: 585-cluster-balance-v1-network-32.png: Not copying as --dry-run
+2018/03/16 13:10:44 NOTICE: 585-cluster-balance-v1-network-traffic.png: Not copying as --dry-run
+2018/03/16 13:10:44 NOTICE: Beautex-v1-apache-request.png: Not copying as --dry-run
+2018/03/16 13:10:45 INFO  : webdav root 'backup': Waiting for checks to finish
+2018/03/16 13:10:45 INFO  : webdav root 'backup': Waiting for transfers to finish
+2018/03/16 13:10:45 INFO  : Waiting for deletions to finish
+2018/03/16 13:10:45 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 0
+Transferred:            6
+Elapsed time:        1.3s
+
+2018/03/16 13:10:45 DEBUG : Go routines at exit 7
+2018/03/16 13:10:45 DEBUG : rclone: Version "v1.39" finishing with parameters ["rclone" "--config" "/home/a.zhideev/rclone/rclone.conf" "--log-file=/home/a.zhideev/rclone/log" "--log-level" "DEBUG" "--dry-run" "sync" "/home/a.zhideev/rclone-test/" "--exclude" "222*" "--exclude" "/4/44/" "--exclude-from" "/home/a.zhideev/rclone/excludes.conf" "--bwlimit=100K" "nxs:backup"]

@@ -4,12 +4,12 @@ options:
         - nxs
     type: "sync"
     source: "/home/a.zhideev/rclone-test/"
-    destination: "test"
+    destination: "backup"
     excludes: 
         - "222*"
         - "/4/44/"
     excludes_file: "/home/a.zhideev/rclone/excludes.conf"
-    bandwidth: "20K"
+    bandwidth: "100K"
     keys: 
         - ""
         #- "--no-gzip-encoding"

@@ -43,9 +43,9 @@ elif args.cmd == 'size':
 elif args.cmd == 'restore':
     command = 'rclone --config '+config_path+' --log-file='+logfile_path+' --log-level DEBUG --dry-run copy ' + 'nxs:'+ args.source + ' ' + args.destination
 elif args.cmd == 'start':
-    command = 'rclone --config '+config_path+' --log-file='+logfile_path+' --log-level DEBUG '+ config['options']['type']+ ' '+ config['options']['source']+' nxs:'+ config['options']['destination']+' --exclude '+ excludes + ' --exclude-from '+ config['options']['excludes_file']+' --bwlimit='+config['options']['bandwidth'] + ' '+keys
+    command = 'rclone --config '+config_path+' --log-file='+logfile_path+' --log-level DEBUG --dry-run sync '+ config['options']['source']+' nxs:'+ config['options']['destination']+' --exclude '+ excludes + ' --exclude-from '+ config['options']['excludes_file']+' --bwlimit='+config['options']['bandwidth'] + ' '+keys
 else:
-    command = 'rclone --config '+config_path+' --log-file='+logfile_path+' --log-level DEBUG --dry-run '+ config['options']['type']+ ' '+ config['options']['source']+' --exclude '+ excludes + ' --exclude-from '+ config['options']['excludes_file']+' --bwlimit='+config['options']['bandwidth'] + ' '+keys+ ' nxs:'+ config['options']['destination']
+    command = 'rclone --config '+config_path+' --log-file='+logfile_path+' --log-level DEBUG --dry-run sync '+ config['options']['source']+' --exclude '+ excludes + ' --exclude-from '+ config['options']['excludes_file']+' --bwlimit='+config['options']['bandwidth'] + ' '+keys+ ' nxs:'+ config['options']['destination']
 
 
 print(command)
