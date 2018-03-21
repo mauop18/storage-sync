@@ -3,12 +3,39 @@
 import yaml
 import subprocess
 import argparse
+import time
+import pycurl
+from io import BytesIO
 
 config_path = "/home/a.zhideev/rclone/rclone.conf"
 
+with open("conf.yaml") as stream:
+    try:
+        config = yaml.load(stream)
+    except yaml.YAMLError as exc:
+        print(exc)
+
+#i = 'nxs'
+#f = open('rclone-new.conf', 'w')
+#f.write('['+'nxs'+']'+'\n' )
+#for i in config['server']['nxs']['connect']:
+    #print (config['server']['nxs']['connect'][1])
+#    f.write(i +'\n')
+#buffer = BytesIO()
+#c = pycurl.Curl()
+#c.setopt(c.URL, 'https://storage.nixys.ru/remote.php/webdav/')
+#c.setopt(c.WRITEDATA, buffer)
+#c.perform()
+#c.close()
+
+command = 'curl --silent -u a.zhideev-tmp:Z8tfgmCjNW7ut6Y  -X PROPFIND  \'https://storage.nixys.ru/remote.php/webdav/\' | xmllint --format -'
+#print(command)
+subprocess.Popen(command, shell=True)
+"""
+
 def get_size(g):
-    cmnd = 'rclone --config '+config_path+' --dry-run size '+ g + ': > /tmp/storage-'+g+'.txt'
-    return cmnd
+    cmd = 'rclone --config '+config_path+' --dry-run size '+ g + ': > /tmp/storage-'+g+'.txt'
+    return cmd
 
 def check_size(c):
     with open('/tmp/storage-'+c+'.txt', 'r') as f:
@@ -41,29 +68,10 @@ def parse_args():
 
     return parser.parse_args()
 
-with open("conf.yaml") as stream:
-    try:
-        config = yaml.load(stream)
-    except yaml.YAMLError as exc:
-        print(exc)
+
 
 args = parse_args()
 if args.cmd == 'ls':
-<<<<<<< HEAD
-    command = 'rclone --config '+config_path+' --log-file='+logfile_path+' --log-level DEBUG --dry-run ls '+ 'nxs:'+ args.dirname
-elif args.cmd == 'size':
-    command = 'rclone --config '+config_path+' --log-file='+logfile_path+' --log-level DEBUG --dry-run size '+ 'nxs:'+ args.dirname
-elif args.cmd == 'restore':
-    command = 'rclone --config '+config_path+' --log-file='+logfile_path+' --log-level DEBUG --dry-run copy ' + 'nxs:'+ args.source + ' ' + args.destination
-elif args.cmd == 'start':
-    command = 'rclone --config '+config_path+' --log-file='+logfile_path+' --log-level DEBUG --dry-run sync '+ config['options']['source']+' nxs:'+ config['options']['destination']+' --exclude '+ excludes + ' --exclude-from '+ config['options']['excludes_file']+' --bwlimit='+config['options']['bandwidth'] + ' '+keys
-else:
-    command = 'rclone --config '+config_path+' --log-file='+logfile_path+' --log-level DEBUG --dry-run sync '+ config['options']['source']+' --exclude '+ excludes + ' --exclude-from '+ config['options']['excludes_file']+' --bwlimit='+config['options']['bandwidth'] + ' '+keys+ ' nxs:'+ config['options']['destination']
-
-
-print(command)
-subprocess.Popen(command, shell=True)
-=======
     command = 'rclone --config '+config_path+' --dry-run ls ' + args.dirname
     #print(command)
     subprocess.Popen(command, shell=True)
@@ -72,22 +80,21 @@ elif args.cmd == 'copy':
 elif args.cmd == '' or 'start':
     for i in config['server']:
         total_size = get_size(i)
+        time.sleep(1)
         #print (total_size)
-        subprocess.Popen(b, shell=True)
+        size = check_size(i)
+        q=round(int(size)/1073741824, 2)
+        r = round(q/int(config['server'][i]['storage_size'])*100, 2)
+        #print(r)
+        if r > int(config['server'][i]['quota']):
+            print ('Quota used percents more then '+ config['server'][i]['quota']+'% (current used space: '+str(q)+'/'+config['server'][i]['storage_size']+' Gb ('+str(r)+'%)). ')
+        subprocess.Popen(total_size, shell=True)
         command = sync_start(i)
         #print(command)
         subprocess.Popen(command, shell=True)
+"""
 
-for l in config['server']:
-    print (l)
-    size = check_size(l)
-    print (size)
-    q=round(int(size)/1073741824, 2)
-    r = round(q/int(config['server'][l]['storage_size'])*100, 2)
-    print(r)
-    if r > int(config['server'][l]['quota']):
-        print ('Quota used percents more then '+ config['server'][l]['quota']+'% (current used space: '+str(q)+'/'+config['server'][l]['storage_size']+' Gb ('+str(r)+'%)). ')
+
 
 #print(command)
 #subprocess.Popen(command, shell=True)
->>>>>>> 5b8356e3128846316ed9e279e43a92bf7bb07194

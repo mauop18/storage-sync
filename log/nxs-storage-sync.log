@@ -1,0 +1,241 @@
+2018/03/19 17:54:08 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/19 17:54:09 INFO  : webdav root 'test': Modify window is 1s
+2018/03/19 17:54:12 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/19 17:54:12 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/19 17:54:16 INFO  : Beautex-v1-apache-request.png: Copied (new)
+2018/03/19 17:54:16 INFO  : 585-cluster-balance-v1-network-32.png: Copied (new)
+2018/03/19 17:54:16 INFO  : 585-cluster-balance-v1-network-traffic.png: Copied (new)
+2018/03/19 17:54:16 INFO  : 585-cluster-balance-v1-network-33.png: Copied (new)
+2018/03/19 17:54:18 INFO  : Beautex-v1-cpu-general.png: Copied (new)
+2018/03/19 17:54:20 INFO  : Beautex-v1-cpu-utilization.png: Copied (new)
+2018/03/19 17:54:20 INFO  : Waiting for deletions to finish
+2018/03/19 17:54:23 INFO  : 1/22/2: Deleted
+2018/03/19 17:54:23 INFO  : 3/33/2: Deleted
+2018/03/19 17:54:24 INFO  : 3/22/1: Deleted
+2018/03/19 17:54:24 INFO  : 3/22/2: Deleted
+2018/03/19 17:54:25 INFO  : 111-222.log: Deleted
+2018/03/19 17:54:25 INFO  : 2/22/1: Deleted
+2018/03/19 17:54:26 INFO  : 3/22/3: Deleted
+2018/03/19 17:54:26 INFO  : 111-333.log: Deleted
+2018/03/19 17:54:26 INFO  : 1/22/1: Deleted
+2018/03/19 17:54:29 INFO  : 1/11/2: Deleted
+2018/03/19 17:54:29 INFO  : 3/33/1: Deleted
+2018/03/19 17:54:29 INFO  : 3/22/1500785442199368569.jpg: Deleted
+2018/03/19 17:54:29 INFO  : 2/22/2: Deleted
+2018/03/19 17:54:30 INFO  : 2/22/3: Deleted
+2018/03/19 17:54:31 INFO  : 1/11/1: Deleted
+2018/03/19 17:54:31 INFO  : 3/33/3: Deleted
+2018/03/19 17:54:31 INFO  : 1/11/3: Deleted
+2018/03/19 17:54:31 INFO  : test-file: Deleted
+2018/03/19 17:54:32 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/19 17:54:32 INFO  : 1/22/3: Deleted
+2018/03/19 17:54:33 INFO  : webdav root 'test': Modify window is 1s
+2018/03/19 17:54:35 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/19 17:54:35 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/19 17:54:35 INFO  : Waiting for deletions to finish
+2018/03/19 17:54:46 INFO  : 
+Transferred:   424.786 kBytes (11.428 kBytes/s)
+Errors:                 0
+Checks:                19
+Transferred:            6
+Elapsed time:       37.1s
+
+2018/03/19 17:54:46 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:       14.3s
+
+2018/03/19 18:39:20 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/19 18:39:23 INFO  : webdav root 'test': Modify window is 1s
+2018/03/19 18:39:23 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/19 18:39:23 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/19 18:39:23 INFO  : Waiting for deletions to finish
+2018/03/19 18:39:23 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:          3s
+
+2018/03/19 18:40:35 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/19 18:40:35 INFO  : webdav root 'test': Modify window is 1s
+2018/03/19 18:40:36 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/19 18:40:36 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/19 18:40:36 INFO  : Waiting for deletions to finish
+2018/03/19 18:40:37 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:        2.1s
+
+2018/03/19 18:40:39 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/19 18:40:42 INFO  : webdav root 'test': Modify window is 1s
+2018/03/19 18:40:44 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/19 18:40:44 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/19 18:40:44 INFO  : Waiting for deletions to finish
+2018/03/19 18:40:46 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:        6.8s
+
+2018/03/19 18:41:07 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/19 18:41:08 INFO  : webdav root 'test': Modify window is 1s
+2018/03/19 18:41:08 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/19 18:41:08 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/19 18:41:08 INFO  : Waiting for deletions to finish
+2018/03/19 18:41:10 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:        3.4s
+
+2018/03/19 18:45:46 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/19 18:45:47 INFO  : webdav root 'test': Modify window is 1s
+2018/03/19 18:45:48 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/19 18:45:48 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/19 18:45:48 INFO  : Waiting for deletions to finish
+2018/03/19 18:45:48 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:        1.7s
+
+2018/03/19 18:46:20 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/19 18:46:23 INFO  : webdav root 'test': Modify window is 1s
+2018/03/19 18:46:24 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/19 18:46:24 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/19 18:46:24 INFO  : Waiting for deletions to finish
+2018/03/19 18:46:24 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:        4.3s
+
+2018/03/19 18:46:47 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/19 18:46:48 INFO  : webdav root 'test': Modify window is 1s
+2018/03/19 18:46:49 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/19 18:46:49 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/19 18:46:49 INFO  : Waiting for deletions to finish
+2018/03/19 18:46:50 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:        2.3s
+
+2018/03/19 18:46:57 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/19 18:46:59 INFO  : webdav root 'test': Modify window is 1s
+2018/03/19 18:47:00 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/19 18:47:00 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/19 18:47:00 INFO  : Waiting for deletions to finish
+2018/03/19 18:47:00 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:        2.8s
+
+2018/03/19 18:47:08 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/19 18:47:09 INFO  : webdav root 'test': Modify window is 1s
+2018/03/19 18:47:10 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/19 18:47:10 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/19 18:47:10 INFO  : Waiting for deletions to finish
+2018/03/19 18:47:10 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:        1.9s
+
+2018/03/19 18:47:35 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/19 18:47:36 INFO  : webdav root 'test': Modify window is 1s
+2018/03/19 18:47:38 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/19 18:47:38 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/19 18:47:38 INFO  : Waiting for deletions to finish
+2018/03/19 18:47:38 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:        3.3s
+
+2018/03/19 18:47:51 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/19 18:47:53 INFO  : webdav root 'test': Modify window is 1s
+2018/03/19 18:47:59 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/19 18:47:59 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/19 18:47:59 INFO  : Waiting for deletions to finish
+2018/03/19 18:48:01 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:        9.5s
+
+2018/03/19 18:48:25 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/19 18:48:26 INFO  : webdav root 'test': Modify window is 1s
+2018/03/19 18:48:27 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/19 18:48:27 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/19 18:48:27 INFO  : Waiting for deletions to finish
+2018/03/19 18:48:27 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:        1.5s
+
+2018/03/19 18:48:37 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/19 18:48:38 INFO  : webdav root 'test': Modify window is 1s
+2018/03/19 18:48:39 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/19 18:48:39 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/19 18:48:39 INFO  : Waiting for deletions to finish
+2018/03/19 18:48:39 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:        2.1s
+
+2018/03/19 18:48:44 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/19 18:48:47 INFO  : webdav root 'test': Modify window is 1s
+2018/03/19 18:48:48 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/19 18:48:48 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/19 18:48:48 INFO  : Waiting for deletions to finish
+2018/03/19 18:48:48 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:        3.5s
+
+2018/03/19 18:48:52 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/19 18:48:55 INFO  : webdav root 'test': Modify window is 1s
+2018/03/19 18:48:56 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/19 18:48:56 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/19 18:48:56 INFO  : Waiting for deletions to finish
+2018/03/19 18:48:57 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:        5.4s
+
+2018/03/19 19:27:34 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/19 19:27:38 INFO  : webdav root 'test': Modify window is 1s
+2018/03/19 19:27:45 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/19 19:27:45 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/19 19:27:45 INFO  : Waiting for deletions to finish
+2018/03/19 19:27:46 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:         12s
+

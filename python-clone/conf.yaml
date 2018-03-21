@@ -1,23 +1,11 @@
-<<<<<<< HEAD
-options: 
-    server:
-        - yandex
-        - nxs
-    type: "sync"
-    source: "/home/a.zhideev/rclone-test/"
-    destination: "backup"
-    excludes: 
-        - "222*"
-        - "/4/44/"
-    excludes_file: "/home/a.zhideev/rclone/excludes.conf"
-    bandwidth: "100K"
-    keys: 
-        - ""
-        #- "--no-gzip-encoding"
-=======
 server:
     #server name (Same as in config file)
     nxs:
+        connect:
+            - type = webdav
+            - url = https://storage.nixys.ru/remote.php/webdav/
+            - user = a.zhideev-tmp
+            - pass = 8hajg6RoYnLSzCuqZNLNhHjQvyF7DVtWowXyzWlWSA #Z8tfgmCjNW7ut6Y
         source: "/home/a.zhideev/rclone-test/"
         destination: "test"                                         #
         logfile_path: "/home/a.zhideev/rclone/log/"
@@ -28,11 +16,11 @@ server:
         bandwidth: "100K"                                           #
         loglevel: "INFO"                                            # DEBUG|INFO|NOTICE|ERROR
         storage_size: "1"                                           # in Gb
-        quota: "1"                                                 # %  
+        quota: "0"                                                 # %  
         keys: 
             - ""
             #- "--no-gzip-encoding"
-    yandex:
+   # yandex:
         source: "/home/a.zhideev/rclone-test/"
         destination: "test"                                         #
         logfile_path: "/home/a.zhideev/rclone/log/"
@@ -47,4 +35,3 @@ server:
         keys: 
             - ""
             #- "--no-gzip-encoding"
->>>>>>> 5b8356e3128846316ed9e279e43a92bf7bb07194
