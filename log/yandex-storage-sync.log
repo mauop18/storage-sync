@@ -1,0 +1,12 @@
+2018/03/27 17:23:10 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/27 17:23:10 INFO  : Yandex test: Modify window is 1ns
+2018/03/27 17:23:11 INFO  : Yandex test: Waiting for checks to finish
+2018/03/27 17:23:11 INFO  : Yandex test: Waiting for transfers to finish
+2018/03/27 17:23:11 INFO  : Waiting for deletions to finish
+2018/03/27 17:23:11 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:       800ms
+

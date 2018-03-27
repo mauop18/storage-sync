@@ -1,0 +1,100 @@
+2018/03/27 17:04:23 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/27 17:04:26 INFO  : webdav root 'test': Modify window not supported
+2018/03/27 17:04:28 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/27 17:04:28 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/27 17:04:28 INFO  : Waiting for deletions to finish
+2018/03/27 17:04:29 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:        5.8s
+
+2018/03/27 17:08:55 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/27 17:08:59 INFO  : webdav root 'test': Modify window not supported
+2018/03/27 17:08:59 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/27 17:08:59 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/27 17:08:59 INFO  : Waiting for deletions to finish
+2018/03/27 17:09:02 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:        7.2s
+
+2018/03/27 17:09:26 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/27 17:09:28 INFO  : webdav root 'test': Modify window not supported
+2018/03/27 17:09:28 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/27 17:09:28 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/27 17:09:28 INFO  : Waiting for deletions to finish
+2018/03/27 17:09:28 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:        2.3s
+
+2018/03/27 17:09:44 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/27 17:09:49 INFO  : webdav root 'test': Modify window not supported
+2018/03/27 17:09:59 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/27 17:09:59 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/27 17:09:59 INFO  : Waiting for deletions to finish
+2018/03/27 17:10:05 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:       20.5s
+
+2018/03/27 17:10:21 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/27 17:10:23 INFO  : webdav root 'test': Modify window not supported
+2018/03/27 17:10:27 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/27 17:10:27 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/27 17:10:27 INFO  : Waiting for deletions to finish
+2018/03/27 17:10:27 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:        5.8s
+
+2018/03/27 17:10:45 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/27 17:10:45 Failed to create file system for "nxs:test": couldn't decrypt password: input too short when revealing password - is it obscured?
+2018/03/27 17:11:06 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/27 17:11:06 Failed to create file system for "nxs:test": couldn't decrypt password: input too short when revealing password - is it obscured?
+2018/03/27 17:13:21 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/27 17:13:25 INFO  : webdav root 'test': Modify window not supported
+2018/03/27 17:13:31 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/27 17:13:31 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/27 17:13:31 INFO  : Waiting for deletions to finish
+2018/03/27 17:13:37 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:       16.8s
+
+2018/03/27 17:13:51 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/27 17:13:52 INFO  : webdav root 'test': Modify window not supported
+2018/03/27 17:13:55 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/27 17:13:55 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/27 17:13:55 INFO  : Waiting for deletions to finish
+2018/03/27 17:13:55 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:          4s
+
+2018/03/27 17:14:17 INFO  : Starting bandwidth limiter at 100kBytes/s
+2018/03/27 17:14:18 INFO  : webdav root 'test': Modify window not supported
+2018/03/27 17:14:24 INFO  : webdav root 'test': Waiting for checks to finish
+2018/03/27 17:14:24 INFO  : webdav root 'test': Waiting for transfers to finish
+2018/03/27 17:14:24 INFO  : Waiting for deletions to finish
+2018/03/27 17:14:26 INFO  : 
+Transferred:      0 Bytes (0 Bytes/s)
+Errors:                 0
+Checks:                 6
+Transferred:            0
+Elapsed time:        9.8s
+
