@@ -5,32 +5,35 @@ server:
             - type = webdav
             - url = https://storage.nixys.ru/remote.php/webdav/
             - user = a.zhideev-tmp
-            - pass = 8hajg6RoYnLSzCuqZNLNhHjQvyF7DVtWowXyzWlWSA #Z8tfgmCjNW7ut6Y
+            - pass = Z8tfgmCjNW7ut6Y #Z8tfgmCjNW7ut6Y  8hajg6RoYnLSzCuqZNLNhHjQvyF7DVtWowXyzWlWSA
         source: "/home/a.zhideev/rclone-test/"
         destination: "test"                                         #
         logfile_path: "/home/a.zhideev/rclone/log/"
-        excludes:                                                   #Relatve PATH
+        excludes:                                                   
             - "222*"
             - "/4/44/"
         excludes_file: "/home/a.zhideev/rclone/excludes.conf"       
         bandwidth: "100K"                                           #
         loglevel: "INFO"                                            # DEBUG|INFO|NOTICE|ERROR
-        storage_size: "1"                                           # in Gb
         quota: "0"                                                 # %  
         keys: 
             - ""
             #- "--no-gzip-encoding"
-   # yandex:
+    yandex:
+        connect:
+            - type = yandex
+            - client_id = 
+            - client_secret = 
+            - token = {"access_token":"AQAAAAActghmAALSwro8eqonT0f6iFvD3rUY1F8","token_type":"bearer","refresh_token":"1:I6tX1W3514IKjRl2:VM406wp_muF1DBoyHPfIihlnkvmun7eDWt-QFh9blGA_WEFDSJai:EiYqMZmg7QqWRbHsP644zA","expiry":"2019-03-03T16:26:54.122081129+07:00"}
         source: "/home/a.zhideev/rclone-test/"
         destination: "test"                                         #
         logfile_path: "/home/a.zhideev/rclone/log/"
-        excludes:                                                   #Relatve PATH
+        excludes:                                                   
             - "222*"
             - "/4/44/"
         excludes_file: "/home/a.zhideev/rclone/excludes.conf"       
         bandwidth: "100K"                                           #
         loglevel: "INFO"                                            # DEBUG|INFO|NOTICE|ERROR
-        storage_size: "1"                                           # in Gb
         quota: "5"                                                 # %  
         keys: 
             - ""
