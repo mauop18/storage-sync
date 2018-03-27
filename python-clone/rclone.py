@@ -47,6 +47,16 @@ with open("conf.yaml") as stream:
     except yaml.YAMLError as exc:
         print(exc)
 
+for l in config['server']:
+    #print (l)
+    size = check_size(l)
+    #print (size)
+    q=round(int(size)/1073741824, 2)
+    r = round(q/int(config['server'][l]['storage_size'])*100, 2)
+    #print(r)
+    if r > int(config['server'][l]['quota']):
+        print ('Quota used percents more then '+ config['server'][l]['quota']+'% (current used space: '+str(q)+'/'+config['server'][l]['storage_size']+' Gb ('+str(r)+'%)). ')
+
 args = parse_args()
 if args.cmd == 'ls':
     command = 'rclone --config '+config_path+' --dry-run ls ' + args.dirname
@@ -58,20 +68,12 @@ elif args.cmd == '' or 'start':
     for i in config['server']:
         total_size = get_size(i)
         #print (total_size)
-        subprocess.Popen(b, shell=True)
+        subprocess.Popen(total_size, shell=True)
         command = sync_start(i)
         #print(command)
         subprocess.Popen(command, shell=True)
 
-for l in config['server']:
-    print (l)
-    size = check_size(l)
-    print (size)
-    q=round(int(size)/1073741824, 2)
-    r = round(q/int(config['server'][l]['storage_size'])*100, 2)
-    print(r)
-    if r > int(config['server'][l]['quota']):
-        print ('Quota used percents more then '+ config['server'][l]['quota']+'% (current used space: '+str(q)+'/'+config['server'][l]['storage_size']+' Gb ('+str(r)+'%)). ')
+
 
 #print(command)
 #subprocess.Popen(command, shell=True)
