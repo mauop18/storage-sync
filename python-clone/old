@@ -1,0 +1,15 @@
+options: 
+    server:
+        - yandex
+        - nxs
+    type: "sync"
+    source: "/home/a.zhideev/rclone-test/"
+    destination: "test"
+    excludes: 
+        - "222*"
+        - "/4/44/"
+    excludes_file: "/home/a.zhideev/rclone/excludes.conf"
+    bandwidth: "20K"
+    keys: 
+        - ""
+        #- "--no-gzip-encoding"
