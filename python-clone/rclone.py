@@ -8,8 +8,7 @@ from io import BytesIO
 import xml.etree.ElementTree as ET
 import os
 import base64
-
-
+import smtplib
 
 config_path = "/home/a.zhideev/rclone/rclone.conf"
 
@@ -19,16 +18,6 @@ with open("conf.yaml") as stream:
     except yaml.YAMLError as exc:
         print(exc)
 
-
-
-#
-#print(command)
-
-
-#for child in o.response('d:href'):
-#    print (child.tag, child.attrib)
-#print(out)
-s = 'nxs'
 def get_user(s):
     for i in config['server'][s]['connect']:
         if i[:4] == 'pass':
@@ -38,15 +27,36 @@ def get_user(s):
             r=i.split()[2]
             continue
     return(r,q)
-t = get_user(s)
-command = "curl --silent -u " + t[0] +':'+ t[1]+"  -X PROPFIND  \'https://storage.nixys.ru/remote.php/webdav/\' | xmllint --format --xpath getlastmodified -"
 
-print(command)
-p = subprocess.Popen(command, shell=True,  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-out, err = p.communicate()
-o = ET.fromstring(out)
-print (out)
-"""
+def send_message(q):
+    from email.mime.text import MIMEText
+    
+    Subject = 'used '+str(q)+'%'
+    msg = MIMEText(Subject)
+    msg['Subject'] = 'Storage alert'
+    msg['To'] = 'a.zhideev@nixys.ru'
+
+    s = smtplib.SMTP('localhost')
+    s.send_message(msg)
+    s.quit()
+    return()
+
+def get_size(s):
+    t = get_user(s)
+    command = "curl --silent -u " + t[0] +':'+ t[1]+"  -X PROPFIND  \'https://storage.nixys.ru/remote.php/webdav/\' | xmllint --format -"
+    print(command)
+    p = subprocess.Popen(command, shell=True,  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out, err = p.communicate()
+    o = ET.fromstring(out)
+    used = int(o[0][1][0][2].text)
+    all = int(o[0][1][0][3].text)
+    d = round(used/all, 3)
+    print ('storage used: ', d,'%')
+    q = int(config['server'][s]['quota'])
+    if d > q:
+        send_message(d)
+    return (d)
+
 def get_pass (s):
     command = 'rclone obscure '+ str(s)
     p = subprocess.run(command, shell=True,  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -96,15 +106,6 @@ with open("conf.yaml") as stream:
     except yaml.YAMLError as exc:
         print(exc)
 
-for l in config['server']:
-    #print (l)
-    size = check_size(l)
-    #print (size)
-    q=round(int(size)/1073741824, 2)
-    r = round(q/int(config['server'][l]['storage_size'])*100, 2)
-    #print(r)
-    if r > int(config['server'][l]['quota']):
-        print ('Quota used percents more then '+ config['server'][l]['quota']+'% (current used space: '+str(q)+'/'+config['server'][l]['storage_size']+' Gb ('+str(r)+'%)). ')
 
 args = parse_args()
 if args.cmd == 'ls':
@@ -116,17 +117,13 @@ if args.cmd == 'ls':
     subprocess.Popen(command, shell=True)
 elif args.cmd == 'copy':
     command = 'rclone --config '+config_path+' --dry-run copy ' + args.source + ' ' + args.destination
-elif args.cmd == '' or 'start':
-    for i in config['server']:
-        total_size = get_size(i)
-        #print (total_size)
-        subprocess.Popen(total_size, shell=True)
-        command = sync_start(i)
-        #print(command)
-        subprocess.Popen(command, shell=True)
+elif args.cmd == 'start':
+    create_conf(args.servername)
+    if args.servername == 'nxs':
+        get_size(args.servername)
+    command = sync_start(args.servername)
+    subprocess.Popen(command, shell=True)
+    #os.remove('rclone-new.conf')
+else:
+    print ('use --help')
 
-
-
-#print(command)
-#subprocess.Popen(command, shell=True)
-"""
