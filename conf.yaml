@@ -1,9 +1,0 @@
-attr: 
-    type: "sync"
-    source: "/home/a.zhideev/rclone-test/"
-    destination: "test"
-    excludes: 
-        - "/home/a.zhideev/rclone-test/22/"
-        - "/home/a.zhideev/rclone-test/11/"
-    bandwidth: "1M"
-    commands: ""
