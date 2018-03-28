@@ -24,7 +24,7 @@ server:
             - type = yandex
             - client_id = 
             - client_secret = 
-            - token = {"access_token":"AQAAAAActghmAALSwro8eqonT0f6iFvD3rUY1F8","token_type":"bearer","refresh_token":"1:I6tX1W3514IKjRl2:VM406wp_muF1DBoyHPfIihlnkvmun7eDWt-QFh9blGA_WEFDSJai:EiYqMZmg7QqWRbHsP644zA","expiry":"2019-03-03T16:26:54.122081129+07:00"}
+            - token = 
         source: "/home/a.zhideev/rclone-test/"
         destination: "test"                                         #
         logfile_path: "/home/a.zhideev/rclone/log/"

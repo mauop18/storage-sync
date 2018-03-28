@@ -4,13 +4,10 @@ import yaml
 import subprocess
 import argparse
 import pycurl
-from io import BytesIO
 import xml.etree.ElementTree as ET
 import os
 import base64
 import smtplib
-
-config_path = "/home/a.zhideev/rclone/rclone.conf"
 
 with open("conf.yaml") as stream:
     try:
@@ -53,15 +50,14 @@ def get_size(s):
     d = round(used/all, 3)
     print ('storage used: ', d,'%')
     q = int(config['server'][s]['quota'])
-    if d > q:
-        send_message(d)
+    #if d > q:
+     #   send_message(d)
     return (d)
 
 def get_pass (s):
-    command = 'rclone obscure '+ str(s)
-    p = subprocess.run(command, shell=True,  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    out = p.stdout.decode('utf-8')
-    print ('pass hashed')
+    cmd = 'rclone obscure '+ str(s)
+    p = subprocess.Popen(cmd, shell=True,  stdout=subprocess.PIPE)
+    out = p.stdout.read().decode('utf-8')
     return (out)
 
 def create_conf(s):
@@ -100,23 +96,20 @@ def parse_args():
 
     return parser.parse_args()
 
-with open("conf.yaml") as stream:
-    try:
-        config = yaml.load(stream)
-    except yaml.YAMLError as exc:
-        print(exc)
-
-
 args = parse_args()
 if args.cmd == 'ls':
     if args.dirname[:1] == '/':
-        print ('cut')
+        #print ('cut')
         args.dirname = args.dirname[1:]
-        print (args.dirname)
-    command = 'rclone --config '+config_path+' --dry-run ls ' + args.servername+ ':'+args.dirname
-    subprocess.Popen(command, shell=True)
+        #print (args.dirname)
+        
+    command = 'rclone --config rclone-new.conf --dry-run tree ' + args.servername+ ':'+args.dirname
+    #print (command)
+    p = subprocess.Popen(command, shell=True,  stdout=subprocess.PIPE)
+    out = p.stdout.read().decode('utf-8')
+    print (out)
 elif args.cmd == 'copy':
-    command = 'rclone --config '+config_path+' --dry-run copy ' + args.source + ' ' + args.destination
+    command = 'rclone --config rclone-new.conf --dry-run copy ' + args.source + ' ' + args.destination
 elif args.cmd == 'start':
     create_conf(args.servername)
     if args.servername == 'nxs':
