@@ -1,0 +1,40 @@
+server:
+    #server name (Same as in config file)
+    nxs:
+        connect:
+            - type = webdav
+            - url = https://storage.nixys.ru/remote.php/webdav/
+            - user = 
+            - pass = 
+        source: ""
+        destination: "test"                                         #
+        logfile_path: ""
+        excludes:                                                   
+            - "222*"
+            - "/4/44/"
+        excludes_file: ""       
+        bandwidth: "100K"                                           #
+        loglevel: "INFO"                                            # DEBUG|INFO|NOTICE|ERROR
+        quota: "0"                                                 # %  
+        keys: 
+            - ""
+            #- "--no-gzip-encoding"
+    yandex:
+        connect:
+            - type = yandex
+            - client_id = 
+            - client_secret = 
+            - token = 
+        source: ""
+        destination: "test"                                         #
+        logfile_path: ""
+        excludes:                                                   
+            - "222*"
+            - "/4/44/"
+        excludes_file: ""       
+        bandwidth: "100K"                                           #
+        loglevel: "INFO"                                            # DEBUG|INFO|NOTICE|ERROR
+        quota: "5"                                                 # %  
+        keys: 
+            - ""
+            #- "--no-gzip-encoding"

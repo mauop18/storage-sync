@@ -79,6 +79,13 @@ def sync_start(s):
     cmd = 'rclone --config rclone-new.conf --log-file='+ config['server'][s]['logfile_path']+ s+'-storage-sync.log --log-level ' + config['server'][s]['loglevel'] + ' sync '+ config['server'][s]['source']+ ' '+ s +':'+ config['server'][s]['destination']+' --exclude '+ excludes + ' --exclude-from '+ config['server'][s]['excludes_file']+' --bwlimit='+config['server'][s]['bandwidth'] + ' '+keys
     return cmd
 
+def trim_slash(s):
+    if s[:1] == '/':
+        s = s[1:]
+    return (s)
+
+
+
 def parse_args():
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest='cmd', help='List of commands')
@@ -87,7 +94,11 @@ def parse_args():
     list_parser.add_argument('servername', type=str, help='Remote server name')
     list_parser.add_argument('dirname', type=str, help='Directory to list, / for root')
 
-    copy_parser = subparsers.add_parser('copy', help='Copy [From] [To]')
+    tree_parser = subparsers.add_parser('tree', help='tree command')
+    tree_parser.add_argument('servername', type=str, help='Remote server name')
+    tree_parser.add_argument('dirname', type=str, help='Directory to list, / for root')
+
+    copy_parser = subparsers.add_parser('copy', help='copy [From] [To]')
     copy_parser.add_argument('source', help='From')
     copy_parser.add_argument('destination', help='To:')
 
@@ -98,18 +109,25 @@ def parse_args():
 
 args = parse_args()
 if args.cmd == 'ls':
-    if args.dirname[:1] == '/':
-        #print ('cut')
-        args.dirname = args.dirname[1:]
-        #print (args.dirname)
-        
-    command = 'rclone --config rclone-new.conf --dry-run tree ' + args.servername+ ':'+args.dirname
-    #print (command)
+    args.dirname = trim_slash(args.dirname)
+    print (args.dirname)
+    command = 'rclone --config rclone-new.conf --dry-run lsl ' + args.servername+ ':'+args.dirname
+    print (command)
     p = subprocess.Popen(command, shell=True,  stdout=subprocess.PIPE)
-    out = p.stdout.read().decode('utf-8')
-    print (out)
+    lsout = p.stdout.read().decode('utf-8')
+    print (lsout)
+elif args.cmd == 'tree':
+    args.dirname = trim_slash(args.dirname)
+    print (args.dirname)
+    command = 'rclone --config rclone-new.conf --dry-run tree  --log-file=storage-sync.log ' + args.servername+ ':'+args.dirname
+    print (command)
+    p = subprocess.Popen(command, shell=True,  stdout=subprocess.PIPE)
+    lsout = p.stdout.read().decode('utf-8')
+    print (lsout)
 elif args.cmd == 'copy':
-    command = 'rclone --config rclone-new.conf --dry-run copy ' + args.source + ' ' + args.destination
+    command = 'rclone --config rclone-new.conf --log-file=storage-sync.log --log-level INFO copy ' + args.source + ' ' + args.destination
+    print (command)
+    subprocess.Popen(command, shell=True,  stdout=subprocess.PIPE)
 elif args.cmd == 'start':
     create_conf(args.servername)
     if args.servername == 'nxs':
