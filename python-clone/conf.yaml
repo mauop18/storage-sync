@@ -1,40 +1,54 @@
 server:
     #server name (Same as in config file)
-    nxs:
+    nxs-storage:
         connect:
             - type = webdav
             - url = https://storage.nixys.ru/remote.php/webdav/
             - user = a.zhideev-tmp
-            - pass = Z8tfgmCjNW7ut6Y #Z8tfgmCjNW7ut6Y  8hajg6RoYnLSzCuqZNLNhHjQvyF7DVtWowXyzWlWSA
-        source: "/home/a.zhideev/rclone-test/"
-        destination: "test"                                         #
-        logfile_path: "/home/a.zhideev/rclone/log/"
+            - pass = Z8tfgmCjNW7ut6Y
+        fs_root: "/home/a.zhideev/rclone-test/"
+        storage_root: "test"                                                  #
+        logfile_path: "/home/a.zhideev/rclone/python-clone/log/"
         excludes:                                                   
             - "222*"
             - "/4/44/"
-        excludes_file: "/home/a.zhideev/rclone/excludes.conf"       
-        bandwidth: "100K"                                           #
-        loglevel: "INFO"                                            # DEBUG|INFO|NOTICE|ERROR
-        quota: "0"                                                 # %  
-        keys: 
-            - ""
-            #- "--no-gzip-encoding"
+        exclude_from_file: "/home/a.zhideev/rclone/excludes.conf"       
+        upload_speed_limit: "100"                                             #Bandwidth limit in kBytes/s, or use suffix b|k|M|G
+        loglevel: "INFO"                                                      # DEBUG|INFO|NOTICE|ERROR
+        quota_alert: "10"                                                     # %  
+        quota_stat: "/tmp/nxs-storage.stat"
+        admin_email: "a.zhideev@nixys.ru"
+        options: 
+            - "--copy-links"
+            - "--max-age 2d"
+                        #   --delete-after                        When synchronizing, delete files on destination after transfering
+                        #   --delete-before                       When synchronizing, delete files on destination before transfering
+                        #   --delete-during                       When synchronizing, delete files during transfer (default)
+                        #   --delete-excluded                     Delete files on dest excluded from sync
+                        #   --copy-links                          Follow symlinks and copy the pointed to item.
+                        #   --stats duration                      Interval between printing stats, e.g 500ms, 60s, 5m. (0 to disable) (default 1m0s)
+                        #   --max-age string                      Don't transfer any file older than this in s or suffix ms|s|m|h|d|w|M|y
+                        #   --max-depth int                       If set limits the recursion depth to this. (default -1)
+                        #   --max-size int                        Don't transfer any file larger than this in k or suffix b|k|M|G (default off)
+                        #   --min-age string                      Don't transfer any file younger than this in s or suffix ms|s|m|h|d|w|M|y
+                        #   --min-size int                        Don't transfer any file smaller than this in k or suffix b|k|M|G (default off)
+
     yandex:
         connect:
             - type = yandex
             - client_id = 
             - client_secret = 
             - token = 
-        source: "/home/a.zhideev/rclone-test/"
-        destination: "test"                                         #
-        logfile_path: "/home/a.zhideev/rclone/log/"
+        fs_root: "/home/a.zhideev/rclone-test/"
+        storage_root: "test"                                         #
+        logfile_path: "/home/a.zhideev/rclone/python-clone/log/"
         excludes:                                                   
             - "222*"
             - "/4/44/"
         excludes_file: "/home/a.zhideev/rclone/excludes.conf"       
-        bandwidth: "100K"                                           #
+        upload_speed_limit: "100K"                                           #
         loglevel: "INFO"                                            # DEBUG|INFO|NOTICE|ERROR
-        quota: "5"                                                 # %  
+        quota_alert: "5"                                                 # %  
         keys: 
             - ""
-            #- "--no-gzip-encoding"
+

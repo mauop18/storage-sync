@@ -33,15 +33,14 @@ def send_mail(recipient, body):
     s = smtplib.SMTP('localhost:25')
     s.sendmail(sender, recipient, msg.as_string())
     s.quit()
+    print ('mail send')
 
 #Check webdav storage usage and write to stat file. If quota exceeded call send alert mail function (send_mail())
 def get_quota_usage(servername):
-    create_conf(servername)
     user = get_user_from_cfg(servername)
     command = "curl --silent -u " + user[0] +':'+ user[1]+"  -X PROPFIND  \'https://storage.nixys.ru/remote.php/webdav/\' | xmllint --format -"
-    out = exec_cmd(command)
+    out = exec_cmd(servername, command)
     storage_stat = ET.fromstring(out['stdout'])
-    os.remove('rclone.conf')
 
     quota_used = int(storage_stat[0][1][0][2].text)
     quota_total = int(storage_stat[0][1][0][3].text)+quota_used
@@ -77,12 +76,12 @@ def create_conf(servername):
             continue
         f.write(i +'\n')
     f.close()
-    print ('config file created')
+    #print ('config file created')
     
 def sync_start(servername):
     excludes = " --exclude ".join(config['server'][servername]['excludes'])
     options = " ".join(config['server'][servername]['options'])
-    cmd = 'rclone --config rclone.conf --log-file='+config['server'][servername]['logfile_path']+servername+'-sync.log --dry-run --log-level '+config['server'][servername]['loglevel']+' sync '+ config['server'][servername]['fs_root']+ ' '+ servername +':'+ config['server'][servername]['storage_root']+' --exclude '+ excludes + ' --exclude-from '+ config['server'][servername]['exclude_from_file']+' --bwlimit='+config['server'][servername]['upload_speed_limit'] + ' '+options 
+    cmd = 'rclone --config rclone.conf --log-file='+config['server'][servername]['logfile_path']+servername+'-sync.log  --log-level '+config['server'][servername]['loglevel']+' sync '+ config['server'][servername]['fs_root']+ ' '+ servername +':'+ config['server'][servername]['storage_root']+' --exclude '+ excludes + ' --exclude-from '+ config['server'][servername]['exclude_from_file']+' --bwlimit='+config['server'][servername]['upload_speed_limit'] + ' '+options 
     return (cmd)
 
 def trim_slash(remote_path):
