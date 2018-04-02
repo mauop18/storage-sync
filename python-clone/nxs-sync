@@ -9,132 +9,184 @@ import os
 import base64
 import smtplib
 
+#get username and password from config
+def get_user_from_cfg(servername):
+    for i in config['server'][servername]['connect']:
+        if i[:4] == 'pass':
+            password=i.split()[2]
+            continue
+        if i[:4] == 'user':
+            user=i.split()[2]
+            continue
+    return(user,password)
+
+def send_mail(recipient, body):
+    from email.mime.text import MIMEText
+    sender = 'live.it@bk.ru'
+
+    msg = MIMEText(body, "", "utf-8")
+    msg['Subject'] = 'Nixys.Storage [sync]: quota near to be exceeded for user '
+    msg['From'] = sender
+    msg['To'] = recipient
+
+    #print (body, recipient)
+    s = smtplib.SMTP('localhost:25')
+    s.sendmail(sender, recipient, msg.as_string())
+    s.quit()
+
+#Check webdav storage usage and write to stat file. If quota exceeded call send alert mail function (send_mail())
+def get_quota_usage(servername):
+    create_conf(servername)
+    user = get_user_from_cfg(servername)
+    command = "curl --silent -u " + user[0] +':'+ user[1]+"  -X PROPFIND  \'https://storage.nixys.ru/remote.php/webdav/\' | xmllint --format -"
+    out = exec_cmd(command)
+    storage_stat = ET.fromstring(out['stdout'])
+    os.remove('rclone.conf')
+
+    quota_used = int(storage_stat[0][1][0][2].text)
+    quota_total = int(storage_stat[0][1][0][3].text)+quota_used
+    print('usage stat:', quota_used, quota_total)
+    f = open(config['server'][servername]['quota_stat'], 'w')
+    f.write(str(quota_used)+' '+str(quota_total))
+    f.close()
+
+    print('stat file created')
+    usage_percent = round(quota_used/quota_total*100, 2)
+    print ('storage used: ', usage_percent,'%')
+    quota_alert = int(config['server'][servername]['quota_alert'])
+    if usage_percent > quota_alert:
+        body = 'Quota used percents more then ' + str(quota_alert) + '% (current used space: ' + str(quota_used) + '/' + str(quota_total) + ' bytes (' + str(usage_percent)+ '%))'
+        send_mail(config['server'][servername]['admin_email'], body)
+    return (usage_percent)
+
+#get password hash
+def generate_pass (servername):
+    cmd = 'rclone obscure '+ str(servername)
+    p = subprocess.Popen(cmd, shell=True,  stdout=subprocess.PIPE)
+    out = p.stdout.read().decode('utf-8')
+    return (out)
+
+#create rclone config file
+def create_conf(servername):
+    f = open('rclone.conf', 'w')
+    f.write('['+servername+']'+'\n' )
+    for i in config['server'][servername]['connect']:
+        if i[:4] == 'pass':
+            q=i.split()[2]
+            f.write('pass = '+ generate_pass(q) +'\n')
+            continue
+        f.write(i +'\n')
+    f.close()
+    print ('config file created')
+    
+def sync_start(servername):
+    excludes = " --exclude ".join(config['server'][servername]['excludes'])
+    options = " ".join(config['server'][servername]['options'])
+    cmd = 'rclone --config rclone.conf --log-file='+config['server'][servername]['logfile_path']+servername+'-sync.log --dry-run --log-level '+config['server'][servername]['loglevel']+' sync '+ config['server'][servername]['fs_root']+ ' '+ servername +':'+ config['server'][servername]['storage_root']+' --exclude '+ excludes + ' --exclude-from '+ config['server'][servername]['exclude_from_file']+' --bwlimit='+config['server'][servername]['upload_speed_limit'] + ' '+options 
+    return (cmd)
+
+def trim_slash(remote_path):
+    if remote_path[:1] == '/':
+        remote_path = remote_path[1:]
+    return (remote_path)
+
+def exec_cmd(servername, cmdline):
+    create_conf(servername)
+    data_dict = {}
+    
+    current_process = subprocess.Popen([cmdline], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    data = current_process.communicate()
+
+    data_stdout = data[0][0:-1].decode('utf-8')
+    data_stderr = data[1][0:-1].decode('utf-8')
+
+    data_dict['stdout'] = data_stdout
+    data_dict['stderr'] = data_stderr
+
+    os.remove('rclone.conf')
+
+    return data_dict
+
+#parsing command line arguments
+def parse_args():
+    parser = argparse.ArgumentParser()
+    subparsers = parser.add_subparsers(dest='cmd', help='List of commands')
+
+    start_parser = subparsers.add_parser('start', help='Start sync from local server to remote')
+    start_parser.add_argument('servername', type=str, help='Remote server name')
+
+    list_parser = subparsers.add_parser('ls', help='List all the objects path with modification time, size and path')
+    list_parser.add_argument('servername', type=str, help='Remote server name')
+    list_parser.add_argument('dirname', type=str, help='Directory to list, / for root')
+
+    tree_parser = subparsers.add_parser('tree', help='List the contents of the remote in a tree')
+    tree_parser.add_argument('servername', type=str, help='Remote server name')
+    tree_parser.add_argument('dirname', type=str, help='Directory to list, / for root')
+
+    copy_parser = subparsers.add_parser('copyto', help='Copy from local server to remote')
+    copy_parser.add_argument('servername', type=str, help='Remote server name')
+    copy_parser.add_argument('source', help='Set "From" destination')
+    copy_parser.add_argument('destination', help='Set "To" destination. For remote use [remote server]:[path]')
+
+    restore_parser = subparsers.add_parser('restore', help='Copy from remote to local server')
+    restore_parser.add_argument('servername', type=str, help='Remote server name')
+    restore_parser.add_argument('source', help='Remote path')
+    restore_parser.add_argument('destination', help='Local destination')
+
+    purge_parser = subparsers.add_parser('purge', help='Remove the path and all of its contents')
+    purge_parser.add_argument('servername', type=str, help='Remote server name')
+    purge_parser.add_argument('dirname', type=str, help='Directory to list, / for root')
+
+    size_parser = subparsers.add_parser('size', help='Prints the total size and number of objects in [remote server]:[path]')
+    size_parser.add_argument('servername', type=str, help='Remote server name')
+    size_parser.add_argument('dirname', type=str, help='Directory size, / for root')
+
+    return parser.parse_args()
+
+#open configuration file
 with open("conf.yaml") as stream:
     try:
         config = yaml.load(stream)
     except yaml.YAMLError as exc:
         print(exc)
 
-def get_user(s):
-    for i in config['server'][s]['connect']:
-        if i[:4] == 'pass':
-            q=i.split()[2]
-            continue
-        if i[:4] == 'user':
-            r=i.split()[2]
-            continue
-    return(r,q)
-
-def send_message(q):
-    from email.mime.text import MIMEText
-    
-    Subject = 'used '+str(q)+'%'
-    msg = MIMEText(Subject)
-    msg['Subject'] = 'Storage alert'
-    msg['To'] = 'a.zhideev@nixys.ru'
-
-    s = smtplib.SMTP('localhost')
-    s.send_message(msg)
-    s.quit()
-    return()
-
-def get_size(s):
-    t = get_user(s)
-    command = "curl --silent -u " + t[0] +':'+ t[1]+"  -X PROPFIND  \'https://storage.nixys.ru/remote.php/webdav/\' | xmllint --format -"
-    print(command)
-    p = subprocess.Popen(command, shell=True,  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    out, err = p.communicate()
-    o = ET.fromstring(out)
-    used = int(o[0][1][0][2].text)
-    all = int(o[0][1][0][3].text)
-    d = round(used/all, 3)
-    print ('storage used: ', d,'%')
-    q = int(config['server'][s]['quota'])
-    #if d > q:
-     #   send_message(d)
-    return (d)
-
-def get_pass (s):
-    cmd = 'rclone obscure '+ str(s)
-    p = subprocess.Popen(cmd, shell=True,  stdout=subprocess.PIPE)
-    out = p.stdout.read().decode('utf-8')
-    return (out)
-
-def create_conf(s):
-    f = open('rclone-new.conf', 'w')
-    f.write('['+s+']'+'\n' )
-    for i in config['server'][s]['connect']:
-        if i[:4] == 'pass':
-            q=i.split()[2]
-            f.write('pass = '+ get_pass(q) +'\n')
-            continue
-        f.write(i +'\n')
-    f.close()
-    print ('config file created')
-    return ()
-
-def sync_start(s):
-    excludes = " --exclude ".join(config['server'][s]['excludes'])
-    keys = " ".join(config['server'][s]['keys'])
-    cmd = 'rclone --config rclone-new.conf --log-file='+ config['server'][s]['logfile_path']+ s+'-storage-sync.log --log-level ' + config['server'][s]['loglevel'] + ' sync '+ config['server'][s]['source']+ ' '+ s +':'+ config['server'][s]['destination']+' --exclude '+ excludes + ' --exclude-from '+ config['server'][s]['excludes_file']+' --bwlimit='+config['server'][s]['bandwidth'] + ' '+keys
-    return cmd
-
-def trim_slash(s):
-    if s[:1] == '/':
-        s = s[1:]
-    return (s)
-
-
-
-def parse_args():
-    parser = argparse.ArgumentParser()
-    subparsers = parser.add_subparsers(dest='cmd', help='List of commands')
-
-    list_parser = subparsers.add_parser('ls', help='ls command')
-    list_parser.add_argument('servername', type=str, help='Remote server name')
-    list_parser.add_argument('dirname', type=str, help='Directory to list, / for root')
-
-    tree_parser = subparsers.add_parser('tree', help='tree command')
-    tree_parser.add_argument('servername', type=str, help='Remote server name')
-    tree_parser.add_argument('dirname', type=str, help='Directory to list, / for root')
-
-    copy_parser = subparsers.add_parser('copy', help='copy [From] [To]')
-    copy_parser.add_argument('source', help='From')
-    copy_parser.add_argument('destination', help='To:')
-
-    start_parser = subparsers.add_parser('start', help='start')
-    start_parser.add_argument('servername', type=str, help='Remote server name')
-
-    return parser.parse_args()
-
+#check command line arguments
 args = parse_args()
 if args.cmd == 'ls':
     args.dirname = trim_slash(args.dirname)
-    print (args.dirname)
-    command = 'rclone --config rclone-new.conf --dry-run lsl ' + args.servername+ ':'+args.dirname
-    print (command)
-    p = subprocess.Popen(command, shell=True,  stdout=subprocess.PIPE)
-    lsout = p.stdout.read().decode('utf-8')
-    print (lsout)
+    command = 'rclone --config rclone.conf --dry-run  lsl ' + args.servername+ ':'+args.dirname
+    out = exec_cmd(args.servername, command)
+    print (out['stdout']) 
 elif args.cmd == 'tree':
     args.dirname = trim_slash(args.dirname)
-    print (args.dirname)
-    command = 'rclone --config rclone-new.conf --dry-run tree  --log-file=storage-sync.log ' + args.servername+ ':'+args.dirname
-    print (command)
-    p = subprocess.Popen(command, shell=True,  stdout=subprocess.PIPE)
-    lsout = p.stdout.read().decode('utf-8')
-    print (lsout)
-elif args.cmd == 'copy':
-    command = 'rclone --config rclone-new.conf --log-file=storage-sync.log --log-level INFO copy ' + args.source + ' ' + args.destination
-    print (command)
-    subprocess.Popen(command, shell=True,  stdout=subprocess.PIPE)
+    command = 'rclone --config rclone.conf --dry-run tree ' + args.servername+ ':'+args.dirname
+    out = exec_cmd(args.servername, command)
+    print (out['stdout']) 
+elif args.cmd == 'size':
+    args.dirname = trim_slash(args.dirname)
+    command = 'rclone --config rclone.conf --dry-run  size ' + args.servername+ ':'+args.dirname
+    out = exec_cmd(args.servername, command)
+    print (out['stdout']) 
+elif args.cmd == 'copyto':
+    args.destination = trim_slash(args.destination)
+    command = 'rclone --config rclone.conf --log-file='+config['server'][args.servername]['logfile_path']+args.servername+'-sync.log --log-level '+config['server'][args.servername]['loglevel'] + ' '+ ' copy ' + args.source +' '+ args.servername+ ':'+ args.destination
+    out = exec_cmd(args.servername, command)
+    print (out['stdout']) 
+elif args.cmd == 'restore':
+    args.source = trim_slash(args.source)
+    command = 'rclone --config rclone.conf --log-file='+config['server'][args.servername]['logfile_path']+args.servername+'-sync.log --log-level '+config['server'][args.servername]['loglevel'] + ' '+ ' --dry-run copy ' + args.servername+ ':'+args.source +' '+ args.destination
+    out = exec_cmd(args.servername, command)
+    print (out['stdout']) 
+elif args.cmd == 'purge':
+    args.dirname = trim_slash(args.dirname)
+    command = 'rclone --config rclone.conf --log-file='+config['server'][args.servername]['logfile_path']+args.servername+'-sync.log --log-level '+config['server'][args.servername]['loglevel']+ ' purge '  + args.servername+ ':'+args.dirname
+    out = exec_cmd(args.servername, command)
+    print (out['stdout']) 
 elif args.cmd == 'start':
-    create_conf(args.servername)
-    if args.servername == 'nxs':
-        get_size(args.servername)
     command = sync_start(args.servername)
-    subprocess.Popen(command, shell=True)
-    #os.remove('rclone-new.conf')
+    exec_cmd(args.servername, command)
+    if args.servername == 'nxs-storage':
+        get_quota_usage(args.servername)
+    print('sync started')
 else:
     print ('use --help')
-
