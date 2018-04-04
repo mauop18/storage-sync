@@ -12,15 +12,16 @@ server:
         excludes:                                                   
             - "222*"
             - "/4/44/"
-        exclude_from_file: "/home/a.zhideev/rclone/excludes.conf"       
+        exclude_from_file: "/home/a.zhideev/rclone/excludes.conf" 
+        include:
+            - "2:111*"      
         upload_speed_limit: "100"                                             #Bandwidth limit in kBytes/s, or use suffix b|k|M|G
-        loglevel: "INFO"                                                      # DEBUG|INFO|NOTICE|ERROR
+        loglevel: "DEBUG"                                                      # DEBUG|INFO|NOTICE|ERROR
         quota_alert: "10"                                                     # %  
         quota_stat: "/tmp/nxs-storage.stat"
         admin_email: "a.zhideev@nixys.ru"
         options: 
             - "--copy-links"
-            - "--max-age 2d"
                         #   --delete-after                        When synchronizing, delete files on destination after transfering
                         #   --delete-before                       When synchronizing, delete files on destination before transfering
                         #   --delete-during                       When synchronizing, delete files during transfer (default)

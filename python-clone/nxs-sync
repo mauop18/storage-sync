@@ -8,6 +8,7 @@ import xml.etree.ElementTree as ET
 import os
 import base64
 import smtplib
+import glob
 
 #get username and password from config
 def get_user_from_cfg(servername):
@@ -79,10 +80,28 @@ def create_conf(servername):
     #print ('config file created')
     
 def sync_start(servername):
+    includes = " --include ".join(inc_files(config['server'][servername]['fs_root'], config['server'][servername]['include']))
+    print (includes)
     excludes = " --exclude ".join(config['server'][servername]['excludes'])
+    print(excludes)
     options = " ".join(config['server'][servername]['options'])
-    cmd = 'rclone --config rclone.conf --log-file='+config['server'][servername]['logfile_path']+servername+'-sync.log  --log-level '+config['server'][servername]['loglevel']+' sync '+ config['server'][servername]['fs_root']+ ' '+ servername +':'+ config['server'][servername]['storage_root']+' --exclude '+ excludes + ' --exclude-from '+ config['server'][servername]['exclude_from_file']+' --bwlimit='+config['server'][servername]['upload_speed_limit'] + ' '+options 
+    cmd = 'rclone --config rclone.conf --log-file='+config['server'][servername]['logfile_path']+servername+'-sync.log  --log-level '+config['server'][servername]['loglevel']+' sync '+ config['server'][servername]['fs_root']+ ' '+ servername +':'+ config['server'][servername]['storage_root']+' --exclude '+ excludes +' --include '+ includes + ' --exclude-from '+ config['server'][servername]['exclude_from_file']+' --bwlimit='+config['server'][servername]['upload_speed_limit'] + ' '+options 
     return (cmd)
+
+def inc_files(fs_root,files_path):
+    for i in files_path:
+        a = i.split(":")[0]
+        b = fs_root + i.split(":")[1]
+        print (b)
+        sorted_list = []
+        for j in range (int(a)):
+            z = int('-'+str(j))
+            sorted_list.append(sorted(glob.iglob(b), key=os.path.getctime)[z])
+        
+    print (sorted_list)
+    return sorted_list
+
+
 
 def trim_slash(remote_path):
     if remote_path[:1] == '/':
@@ -102,7 +121,7 @@ def exec_cmd(servername, cmdline):
     data_dict['stdout'] = data_stdout
     data_dict['stderr'] = data_stderr
 
-    os.remove('rclone.conf')
+    #os.remove('rclone.conf')
 
     return data_dict
 
@@ -183,6 +202,7 @@ elif args.cmd == 'purge':
     print (out['stdout']) 
 elif args.cmd == 'start':
     command = sync_start(args.servername)
+    print (command)
     exec_cmd(args.servername, command)
     if args.servername == 'nxs-storage':
         get_quota_usage(args.servername)
