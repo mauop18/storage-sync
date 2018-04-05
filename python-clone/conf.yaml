@@ -14,7 +14,9 @@ server:
             - "/4/44/"
         exclude_from_file: "/home/a.zhideev/rclone/excludes.conf" 
         include:
-            - "2:111*"      
+            - "2:111*"
+            - "222*"
+            - "3:/3/33/1*"      
         upload_speed_limit: "100"                                             #Bandwidth limit in kBytes/s, or use suffix b|k|M|G
         loglevel: "DEBUG"                                                      # DEBUG|INFO|NOTICE|ERROR
         quota_alert: "10"                                                     # %  

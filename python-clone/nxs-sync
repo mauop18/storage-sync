@@ -9,6 +9,7 @@ import os
 import base64
 import smtplib
 import glob
+import tempfile
 
 #get username and password from config
 def get_user_from_cfg(servername):
@@ -79,15 +80,50 @@ def create_conf(servername):
     f.close()
     #print ('config file created')
     
-def sync_start(servername):
-    includes = " --include ".join(inc_files(config['server'][servername]['fs_root'], config['server'][servername]['include']))
-    print (includes)
-    excludes = " --exclude ".join(config['server'][servername]['excludes'])
-    print(excludes)
+def sync_start(servername, sorted_list):
+    #includes = " --include ".join(inc_files(config['server'][servername]['fs_root'], config['server'][servername]['include']))
+    #print (includes)
+    #excludes = " --exclude ".join(config['server'][servername]['excludes'])
+    #print(excludes)
+    filtered = "\" --filter=\"".join(sorted_list)
     options = " ".join(config['server'][servername]['options'])
-    cmd = 'rclone --config rclone.conf --log-file='+config['server'][servername]['logfile_path']+servername+'-sync.log  --log-level '+config['server'][servername]['loglevel']+' sync '+ config['server'][servername]['fs_root']+ ' '+ servername +':'+ config['server'][servername]['storage_root']+' --exclude '+ excludes +' --include '+ includes + ' --exclude-from '+ config['server'][servername]['exclude_from_file']+' --bwlimit='+config['server'][servername]['upload_speed_limit'] + ' '+options 
+    cmd = 'rclone --config rclone.conf --log-file='+config['server'][servername]['logfile_path']+servername+'-sync.log  --log-level '+config['server'][servername]['loglevel']+' sync '+ config['server'][servername]['fs_root']+ ' '+ servername +':'+ config['server'][servername]['storage_root'] + ' --filter="'+filtered +'" --bwlimit='+config['server'][servername]['upload_speed_limit'] + ' '+options 
     return (cmd)
 
+#' --exclude '+ excludes +
+#+' --include '+ includes
+#' --exclude-from '+ config['server'][servername]['exclude_from_file']+
+
+def create_filtering_list(servername):
+    inclide = config['server'][servername]['include']
+    exclude = config['server'][servername]['excludes']
+    fs_root = config['server'][servername]['fs_root']
+    sorted_list = []
+
+    for i in inclide:
+        if  i.find(':') == True:
+            files_number = i.split(":")[0]
+            files_path = fs_root + i.split(":")[1]
+            for j in range (int(files_number)):
+                z = int('-'+str(j))
+                filtered_files = sorted(glob.iglob(files_path), key=os.path.getctime)[z]
+                cut_path = '+ '+ filtered_files.replace(fs_root, '', 1)
+                sorted_list.append(cut_path)
+        else:
+            files_path = fs_root + i
+            all_files_path = sorted(glob.iglob(files_path))
+            for j in all_files_path:
+                cut_path = '+ ' + j.replace(fs_root, '', 1)
+                sorted_list.append(cut_path) 
+    for i in exclude:
+        files_path = fs_root + i
+        all_files_path = sorted(glob.iglob(files_path))
+        for j in all_files_path:
+            cut_path = '- ' + j.replace(fs_root, '', 1)
+            sorted_list.append(cut_path)
+    return (sorted_list)
+
+'''''
 def inc_files(fs_root,files_path):
     for i in files_path:
         a = i.split(":")[0]
@@ -96,12 +132,12 @@ def inc_files(fs_root,files_path):
         sorted_list = []
         for j in range (int(a)):
             z = int('-'+str(j))
-            sorted_list.append(sorted(glob.iglob(b), key=os.path.getctime)[z])
-        
+            x = sorted(glob.iglob(b), key=os.path.getctime)[z]
+            cutx = x.replace(fs_root, '', 1)
+            sorted_list.append(cutx)
     print (sorted_list)
     return sorted_list
-
-
+'''''
 
 def trim_slash(remote_path):
     if remote_path[:1] == '/':
@@ -156,7 +192,7 @@ def parse_args():
     purge_parser.add_argument('dirname', type=str, help='Directory to list, / for root')
 
     size_parser = subparsers.add_parser('size', help='Prints the total size and number of objects in [remote server]:[path]')
-    size_parser.add_argument('servername', type=str, help='Remote server name')
+    size_parser.add_argument('servername', type=str, help='Remot server name')
     size_parser.add_argument('dirname', type=str, help='Directory size, / for root')
 
     return parser.parse_args()
@@ -201,7 +237,9 @@ elif args.cmd == 'purge':
     out = exec_cmd(args.servername, command)
     print (out['stdout']) 
 elif args.cmd == 'start':
-    command = sync_start(args.servername)
+    sorted_list = create_filtering_list(args.servername)
+    print (sorted_list)
+    command = sync_start(args.servername, sorted_list)
     print (command)
     exec_cmd(args.servername, command)
     if args.servername == 'nxs-storage':
